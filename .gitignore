@@ -1,0 +1,28 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build outputs
+bin/
+obj/
+Debug/
+Release/
+out/
+dist/
+
+# Environment & secrets
+.env
+appsettings.Development.json
+
+# Logs
+*.log
+
+# Node.js (nếu có frontend React/Angular)
+node_modules/
+
+# Publish
+wwwroot/
+
