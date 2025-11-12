@@ -1,0 +1,52 @@
+﻿@page
+@model Clinic_management.Pages.Doctor.DoctorPrescriptionInvoiceModel
+@{
+    ViewData["Title"] = "Toa thuốc & Hóa đơn";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/doctor-prescription.css" />
+
+<div class="invoice-container">
+    <h1><i class="fas fa-file-invoice"></i> Toa thuốc & Hóa đơn</h1>
+
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="prescriptions">Toa thuốc đã kê</button>
+        <button class="tab-btn" data-tab="invoices">Hóa đơn</button>
+    </div>
+
+    <div id="prescriptions" class="tab-content active">
+        <table id="prescriptionTable">
+            <thead>
+                <tr><th>Ngày</th><th>Bệnh nhân</th><th>Thuốc</th><th>Liều</th><th>SL</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div id="invoices" class="tab-content">
+        <table id="invoiceTable">
+            <thead>
+                <tr><th>Mã HD</th><th>Bệnh nhân</th><th>Tổng tiền</th><th>Trạng thái</th><th>Hành động</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Pages/Doctor/doctor-script.js"></script>
+    <script>
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById(btn.dataset.tab).classList.add('active');
+                if (btn.dataset.tab === 'invoices') loadInvoices();
+                else loadPrescriptions();
+            });
+        });
+        loadPrescriptions();
+    </script>
+}

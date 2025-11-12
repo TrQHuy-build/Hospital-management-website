@@ -1,0 +1,81 @@
+﻿@page
+@model Clinic_management.Pages.Doctor.DoctorDashboardModel
+@{
+    ViewData["Title"] = "Bác sĩ - Trang chủ";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/doctor-dashboard.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<div class="doctor-container">
+    <header class="dashboard-header">
+        <h1><i class="fas fa-user-md"></i> Chào mừng, <span id="doctorName"></span></h1>
+        <p>Chuyên khoa: <span id="specialization"></span> | Ca trực hôm nay: <span id="todayShift"></span></p>
+    </header>
+
+    <section class="stats-grid">
+        <div class="stat-card">
+            <i class="fas fa-calendar-check"></i>
+            <div>
+                <h3 id="todayAppointments">0</h3>
+                <p>Lịch hẹn hôm nay</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-clock"></i>
+            <div>
+                <h3 id="waitingPatients">0</h3>
+                <p>Đang chờ khám</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-file-medical"></i>
+            <div>
+                <h3 id="todayRecords">0</h3>
+                <p>Bệnh án hôm nay</p>
+            </div>
+        </div>
+        <div class="stat-card warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <div>
+                <h3 id="lowStockItems">0</h3>
+                <p>Vật tư sắp hết</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="appointments-today">
+        <h2><i class="fas fa-list-alt"></i> Lịch hẹn hôm nay</h2>
+        <div class="table-container">
+            <table id="appointmentsTable">
+                <thead>
+                    <tr>
+                        <th>Thời gian</th>
+                        <th>Bệnh nhân</th>
+                        <th>Dịch vụ</th>
+                        <th>Trạng thái</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- JS sẽ fill -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <div class="action-buttons">
+        <button onclick="openExamination()" class="btn-primary"><i class="fas fa-stethoscope"></i> Bắt đầu khám</button>
+        <button onclick="viewShift()" class="btn-secondary"><i class="fas fa-calendar-alt"></i> Xem ca trực</button>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Pages/Doctor/doctor-script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDoctorDashboard();
+        });
+    </script>
+}

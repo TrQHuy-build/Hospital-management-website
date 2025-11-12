@@ -7,4 +7,8 @@
     <RootNamespace>Clinic_management</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>

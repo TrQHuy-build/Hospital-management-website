@@ -1,0 +1,72 @@
+﻿@page
+@model Clinic_management.Pages.Doctor.DoctorExaminationModel
+@{
+    ViewData["Title"] = "Khám bệnh";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/doctor-examination.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<div class="exam-container">
+    <h1><i class="fas fa-stethoscope"></i> Khám bệnh</h1>
+
+    <div class="patient-info-card">
+        <h3>Thông tin bệnh nhân</h3>
+        <p><strong>Họ tên:</strong> <span id="patientName"></span></p>
+        <p><strong>Ngày sinh:</strong> <span id="patientDOB"></span> | <strong>Giới tính:</strong> <span id="patientGender"></span></p>
+        <p><strong>SĐT:</strong> <span id="patientPhone"></span> | <strong>BHYT:</strong> <span id="patientInsurance"></span></p>
+    </div>
+
+    <div class="history-card">
+        <h3>Lịch sử bệnh án</h3>
+        <div id="historyList"></div>
+    </div>
+
+    <form id="examForm">
+        <div class="form-group">
+            <label>Chẩn đoán</label>
+            <textarea id="diagnosis" rows="3" required></textarea>
+        </div>
+        <div class="form-group">
+            <label>Điều trị</label>
+            <textarea id="treatment" rows="3" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Dịch vụ thực hiện</label>
+            <select id="serviceSelect" multiple size="4"></select>
+        </div>
+
+        <div class="form-group">
+            <label>Kê đơn thuốc</label>
+            <div id="prescriptionList">
+                <div class="prescription-row">
+                    <select class="medicine-select"></select>
+                    <input type="text" placeholder="Liều lượng" class="dosage-input" />
+                    <input type="number" placeholder="SL" min="1" class="qty-input" />
+                    <button type="button" class="remove-med">X</button>
+                </div>
+            </div>
+            <button type="button" id="addMedicine">+ Thêm thuốc</button>
+        </div>
+
+        <div class="form-actions">
+            <button type="button" onclick="saveRecord()" class="btn-primary">Lưu bệnh án</button>
+            <button type="button" onclick="createInvoice()" class="btn-success">Tạo hóa đơn</button>
+            <button type="button" onclick="completeAppointment()" class="btn-complete">Hoàn thành</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="~/Pages/Doctor/doctor-script.js"></script>
+    <script>
+        let currentAppointmentId = new URLSearchParams(window.location.search).get('id');
+        document.addEventListener('DOMContentLoaded', () => {
+            loadExamination(currentAppointmentId);
+            loadServices();
+            loadMedicines();
+        });
+    </script>
+}
