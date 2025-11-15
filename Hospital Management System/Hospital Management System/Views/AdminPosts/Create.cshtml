@@ -1,0 +1,86 @@
+@model Hospital_Management_System.Models.Post
+@{
+    ViewBag.Title = "Tạo bài viết";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Tạo bài viết mới</h3>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Create", "AdminPosts", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Title, new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control", placeholder = "Tiêu đề bài viết" })
+                    @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.ThumbnailUrl, new { @class = "control-label col-md-2" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(m => m.ThumbnailUrl, new { @class = "form-control", placeholder = "Đường dẫn ảnh đại diện" })
+                    @Html.ValidationMessageFor(m => m.ThumbnailUrl, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Author, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Author, new { @class = "form-control", placeholder = "Tác giả" })
+                    @Html.ValidationMessageFor(m => m.Author, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.PublishedDate, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.PublishedDate, "{0:yyyy-MM-ddTHH:mm}", new { @class = "form-control", type = "datetime-local" })
+                    @Html.ValidationMessageFor(m => m.PublishedDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Status, new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    <div class="checkbox">
+                        <label>
+                            @Html.CheckBoxFor(m => m.Status) Hiển thị
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Content, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(m => m.Content, 10, 0, new { @class = "form-control", id = "Content" })
+                    @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-primary">Lưu bài viết</button>
+                    <a href="@Url.Action("Index", "Admin")" class="btn btn-default">Hủy</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts {
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Content'))
+            .catch(error => {
+                console.error('CKEditor init error', error);
+            });
+    </script>
+}

@@ -1,0 +1,181 @@
+﻿@using System.Web.UI.WebControls
+@using Hospital_Management_System.Models
+@{
+    ViewBag.Title = "Trang chủ";
+}
+
+<header id="Home">
+    <nav>
+        <div class="row">
+            <img src="~/Content/Layout/resources/img/logo-white.jpg" alt="HMS logo" class="logo">
+            <img src="~/Content/Layout/resources/img/logo.jpg" alt="HMS logo" class="logo-black">
+            <ul class="main-nav js-main-nav">
+                <li><a href="#Home">Trang chủ</a></li>
+                <li><a href="#services">Dịch vụ</a></li>
+                <li><a href="#about">Giới thiệu</a></li>
+                <li><a href="#contact">Liên hệ</a></li>
+                <li><a href="@Url.Action("Index", "Posts")">Bài viết</a></li>
+                <li><a href="@Url.Action("Register", "Account")">Đăng ký</a></li>
+                <li><a href="@Url.Action("Login", "Account")">Đăng nhập</a></li>
+            </ul>
+            <a class="mobile-nav-icon js-mobile-nav-icon"><i class="ion-ios-menu"></i></a>
+        </div>
+    </nav>
+    <div class="hero-text-box">
+    <h1>Bệnh viện Đa khoa<br> UTC2.</h1>
+        <br>
+    <a class="btn btn-ghost js-scroll-to-start" href="#">Xem thêm</a>
+    </div>
+</header>
+
+<section class="section-features js-section-features" id="services">
+    <div class="row">
+    <h2>Dịch vụ</h2>
+    <p class="long-copy">Xin chào, đây là Hệ thống Quản lý Bệnh viện. Chúng tôi cung cấp các dịch vụ tốt nhất cho bệnh nhân và quản lý họ một cách chuyên nghiệp.</p>
+    </div>
+    <div class="row js-wp-1">
+        <div class="col span-1-of-4 box for-icons">
+            <i class="icon ion-md-medkit"></i>
+            <h3>Cấp cứu</h3>
+            <p>Khoa Cấp cứu tại Bệnh viện và Trung tâm Y tế cung cấp chăm sóc cho bệnh nhân với các tình trạng y tế khẩn cấp từ các vấn đề phức tạp. Chăm sóc được cung cấp 24 giờ một ngày.</p>
+        </div>
+        <div class="col span-1-of-4 box for-icons">
+            <i class="icon ion-md-call"></i>
+            <h3>Trung tâm liên lạc 24/7</h3>
+            <p>Các đại lý của chúng tôi luôn có mặt 24 giờ một ngày, 7 ngày trong tuần và 365 ngày trong năm. Luôn có một đại diện lịch sự, giọng nói trực tiếp sẵn sàng hỗ trợ bệnh nhân và gia đình họ, bất kể nhu cầu của họ là gì.</p>
+        </div>
+        <div class="col span-1-of-4 box for-icons">
+            <i class="icon ion-md-car"></i>
+            <h3>Cấp cứu/Xe cứu thương</h3>
+            <p>Chuyển từ các bệnh viện khác cho bệnh nhân nặng cần hỗ trợ máy thở và giám sát.
+                Vận chuyển bệnh nhân từ nhà đến bệnh viện.
+                Transport of patients from hospital to home.</p>
+        </div>
+        <div class="col span-1-of-4 box for-icons">
+            <i class="icon ion-md-checkmark-circle-outline"></i>
+            <h3>Đặt lịch hẹn</h3>
+            <p>We are happy to announce that our online appointment booking system is developed and launched. Please check back soon for more updates.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section-steps" id="about">
+    <div class="row">
+        <h2>Về chúng tôi &mdash; Tầm nhìn</h2>
+    </div>
+    <div class="row">
+        <div class="col span-1-of-2 step-box">
+            <img src="~/Content/Layout/resources/img/app-iPhone.png" alt="Omnifood app on iphone" class="app-screen js-wp-2">
+        </div>
+        <div class="col span-1-of-2 step-box">
+            <div class="works-step">
+                <div>1</div>
+                <p>Hệ thống Quản lý Bệnh viện (HMS) mở cửa phục vụ mọi bệnh nhân hàng ngày, cung cấp chăm sóc y tế cơ bản và các dịch vụ chuyên sâu hiện đại.</p>
+            </div>
+            <div class="works-step">
+                <div>2</div>
+                <p>Chúng tôi sử dụng kiến thức chuyên môn để điều trị nhiều vấn đề sức khỏe khác nhau, với cách tiếp cận cá nhân và ứng dụng nghiên cứu chuyên sâu, cập nhật.</p>
+            </div>
+            <div class="works-step">
+                <div>3</div>
+                <p>
+                    Chúng tôi sẽ đổi mới và định hình tương lai chăm sóc sức khỏe cho các thế hệ,
+                    và trở thành lựa chọn hàng đầu của người bệnh.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-cities" id="cities">
+    <div class="row">
+        <h2>We're currently in these cities</h2>
+    </div>
+    <div class="row js-wp-3">
+        <div class="col span-1-of-4 box">
+            <img src="~/Content/Layout/resources/img/Lahore.jpg" alt="lisbon">
+            <h3>Lahore</h3>
+            <div class="city-feature">
+                <i class="icon ion-logo-facebook small-icons"></i>
+                <a href="#">HMS_Lahore</a>
+            </div>
+        </div>
+        <div class="col span-1-of-4 box">
+            <img src="~/Content/Layout/resources/img/Gujranwala.jpg" alt="lisbon">
+            <h3>Gujranwala</h3>
+            <div class="city-feature">
+                <i class="icon ion-logo-facebook small-icons"></i>
+                <a href="#">HMS_Gujranwala</a>
+            </div>
+        </div>
+        <div class="col span-1-of-4 box">
+            <img src="~/Content/Layout/resources/img/Faislabad.jpg" alt="lisbon">
+            <h3>Faislabad</h3>
+            <div class="city-feature">
+                <i class="icon ion-logo-facebook small-icons"></i>
+                <a href="#">HMS_Faislabad</a>
+            </div>
+        </div>
+        <div class="col span-1-of-4 box">
+            <img src="~/Content/Layout/resources/img/Multan.png" alt="lisbon">
+            <h3>Multan</h3>
+            <div class="city-feature">
+                <i class="icon ion-logo-facebook small-icons"></i>
+                <a href="#">HMS_Multan</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-testimonials" id="reviews">
+    <div class="row">
+        <h2>Our patients can't live without us</h2>
+    </div>
+    <div class="row">
+        <div class="col span-1-of-3">
+            <blockquote>HMS is just awesome! I just launched a startup which leaves me with no time for Medicine, so HMS is a life-saver. Now that I got used to it</blockquote>
+            <cite><img src="~/Content/Layout/resources/img/customer-1.jpg" alt="first-customer">Alberto Duncan</cite>
+        </div>
+        <div class="col span-1-of-3">
+            <blockquote>We as a family have always had the very best treatment we could possibly get at
+                Good Hope Hospital and could not criticise in any way. A & E , Wards, Doctors and Nurses and helpers all do a fabulous job. Well done to you all and you all deserve a medal.</blockquote>
+            <cite><img src="~/Content/Layout/resources/img/customer-2.jpg" alt="first-customer">Joana Silva</cite>
+        </div>
+        <div class="col span-1-of-3">
+            <blockquote>Treated well, respectfully and had everything clearly explained throughout the procedures.
+                Explained what was happening throughout and treated with compassion and cheerfulness.</blockquote>
+            <cite><img src="~/Content/Layout/resources/img/customer-3.jpg" alt="first-customer">Milton Chapman</cite>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="row">
+        <div class="col span-1-of-2">
+            <ul class="footer-nav">
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Press</a></li>
+                <li><a href="#">IOS App</a></li>
+                <li><a href="#">Andriod App</a></li>
+            </ul>
+        </div>
+        <div class="col span-1-of-2">
+            <ul class="social-links">
+                <li><a href="#"><i class="ion-logo-facebook"></i></a></li>
+                <li><a href="#"><i class="ion-logo-twitter"></i></a></li>
+                <li><a href="#"><i class="ion-logo-googleplus"></i></a></li>
+                <li><a href="#"><i class="ion-logo-instagram"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <p> Copyright &copy; @DateTime.Now.Year by HMS. All rights reserved.</p>
+    </div>
+</footer>
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

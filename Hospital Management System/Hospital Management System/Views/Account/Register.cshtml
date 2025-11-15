@@ -1,0 +1,88 @@
+﻿@using Hospital_Management_System.Models
+@model Hospital_Management_System.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Đăng ký";
+}
+<section class="section-form" id="contact">
+    <div class="row">
+        <h2>@ViewBag.Title.</h2>
+    </div>
+    @using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col span-1-of-4">
+
+            </div>
+            <div class="col span-2-of-4">
+                <div class="plan-box">
+                    <div>
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <div>
+                            <label for="name">Tên đăng nhập<span style="color: red; font-weight: bold">*</span></label>
+                            @Html.TextBoxFor(m => m.UserName, new {@placeholder = "Tên đăng nhập", id = "name"})
+                            @*@Html.ValidationMessageFor(m => m.UserName, "", new {@class = "text-danger"})*@
+                        </div>
+                        <div>
+                            <label for="fname">Tên<span style="color: red; font-weight: bold">*</span></label>
+                            @Html.TextBoxFor(m => m.FirstName, new {@placeholder = "Tên", id = "fname"})
+                            @*@Html.ValidationMessageFor(m => m.FirstName, "", new {@class = "text-danger"})*@
+                        </div>
+                        <div>
+                            <label for="lname">Họ<span style="color: red; font-weight: bold">*</span></label>
+                            @Html.TextBoxFor(m => m.LastName, new {@placeholder = "Họ", id = "lname"})
+                            @*@Html.ValidationMessageFor(m => m.LastName, "", new {@class = "text-danger"})*@
+                        </div>
+                        <div>
+                            <label for="email">Email<span style="color: red; font-weight: bold">*</span></label>
+                            @Html.TextBoxFor(m => m.Email, new {@placeholder = "Email của bạn", id = "email"})
+                            @*@Html.ValidationMessageFor(m => m.Email, "", new {@class = "text-danger"})*@
+                        </div>
+                        @*@{
+                            var list = new List<RegisterViewModel>
+                            {
+                                new RegisterViewModel {UserRole = "Patient"},
+                                new RegisterViewModel {UserRole = "Doctor"},
+                                new RegisterViewModel {UserRole = "Admin"}
+                            };
+                        }
+                        <div>
+                            <label for="role">User Role</label>
+                            @Html.DropDownListFor(m => m.UserRole, new SelectList(list, "UserRole", "UserRole"), "--Select Role--", new {@id = "role"})
+                            @Html.ValidationMessageFor(m => m.UserRole, "", new {@class = "text-danger"})
+                        </div>*@
+                        <div>
+                            <label for="password">Mật khẩu<span style="color: red; font-weight: bold">*</span></label>
+                            @Html.PasswordFor(m => m.Password, new {@placeholder = "Mật khẩu", id = "password"})
+                            @*@Html.ValidationMessageFor(m => m.Password, "", new {@class = "text-danger"})*@
+                        </div>
+
+                        <div>
+                            <label for="cpassword">Xác nhận mật khẩu<span style="color: red; font-weight: bold">*</span></label>
+                            @Html.PasswordFor(m => m.ConfirmPassword, new {@placeholder = "Xác nhận mật khẩu", id = "cpassword"})
+                            @*@Html.ValidationMessageFor(m => m.ConfirmPassword, "", new {@class = "text-danger"})*@
+                        </div>
+                        <br/>
+                        <p>
+                            @Html.ActionLink("Đã có tài khoản?", "Login")
+                        </p>
+                    </div>
+                    <div style="text-align: center !important">
+                        <input type="submit" value="Đăng ký" class="btn btn-ghost">
+                    </div>
+                </div>
+            </div>
+            <div class="col span-1-of-4">
+
+            </div>
+        </div>
+        <div style="text-align: center" class="row">
+            @Html.ActionLink("Back to Home", "Index", "Home")
+        </div>
+   }
+
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,100 @@
+﻿namespace Hospital_Management_System.Migrations
+{
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Models;
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Migrations;
+    using System.Linq;
+
+    internal sealed class Configuration : DbMigrationsConfiguration<Hospital_Management_System.Models.ApplicationDbContext>
+    {
+        public Configuration()
+        {
+            AutomaticMigrationsEnabled = false;
+        }
+
+        protected override void Seed(Hospital_Management_System.Models.ApplicationDbContext context)
+        {
+            // Tạo UserManager để quản lý users
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+
+            // Tạo các roles nếu chưa tồn tại
+            if (!roleManager.RoleExists("Admin"))
+            {
+                roleManager.Create(new IdentityRole("Admin"));
+            }
+            if (!roleManager.RoleExists("Doctor"))
+            {
+                roleManager.Create(new IdentityRole("Doctor"));
+            }
+
+            // Tạo tài khoản Admin
+            var adminUser = new ApplicationUser
+            {
+                UserName = "admin@hospital.com",
+                Email = "admin@hospital.com",
+                EmailConfirmed = true,
+                UserRole = "Admin",
+                RegisteredDate = DateTime.Now
+            };
+
+            // Thêm admin nếu chưa tồn tại
+            if (userManager.FindByEmail("admin@hospital.com") == null)
+            {
+                var result = userManager.Create(adminUser, "Admin@123");
+                if (result.Succeeded)
+                {
+                    userManager.AddToRole(adminUser.Id, "Admin");
+                }
+            }
+
+            // Tạo tài khoản Doctor
+            var doctorUser = new ApplicationUser
+            {
+                UserName = "doctor@hospital.com",
+                Email = "doctor@hospital.com",
+                EmailConfirmed = true,
+                UserRole = "Doctor",
+                RegisteredDate = DateTime.Now
+            };
+
+            // Thêm doctor nếu chưa tồn tại
+            if (userManager.FindByEmail("doctor@hospital.com") == null)
+            {
+                var result = userManager.Create(doctorUser, "Doctor@123");
+                if (result.Succeeded)
+                {
+                    userManager.AddToRole(doctorUser.Id, "Doctor");
+                }
+
+                // Tạo Department mặc định nếu chưa có
+                var department = context.Department.FirstOrDefault();
+                if (department == null)
+                {
+                    department = new Department { Name = "General Medicine" };
+                    context.Department.Add(department);
+                    context.SaveChanges();
+                }
+
+                // Tạo thông tin bác sĩ
+                var doctor = new Doctor
+                {
+                    FirstName = "John",
+                    LastName = "Doe",
+                    FullName = "John Doe",
+                    ApplicationUserId = doctorUser.Id,
+                    DepartmentId = department.Id,
+                    ContactNo = "0123456789",
+                    BloodGroup = "O+",
+                    Education = "MBBS"
+                };
+                context.Doctors.Add(doctor);
+            }
+
+            context.SaveChanges();
+        }
+    }
+}

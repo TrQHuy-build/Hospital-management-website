@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Hospital_Management_System.Models.Appointment>
+
+@{
+    ViewBag.Title = "Lịch hẹn đang hoạt động";
+    Layout = "~/Views/Shared/_DoctorLayout.cshtml";
+}
+
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+    <li class="active">Lịch hẹn</li>
+    <li class="active">Lịch hẹn đang hoạt động</li>
+    </ol>
+</div>
+
+<h2>Lịch hẹn đang hoạt động</h2>
+
+<p>
+    @Html.ActionLink("Tạo mới", "AddAppointment", null, new { @class = "btn btn-primary" })
+</p>
+<table id="table_id" class="table">
+    <thead>
+        <tr>
+            <th>
+                Bác sĩ
+            </th>
+            <th>
+                Bệnh nhân
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppointmentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Problem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Doctor.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Patient.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AppointmentDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Problem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    <a href="@Url.Action("EditAppointment", new {id = item.Id})" class="fa fa-pencil-square-o" style="font-size: 19px" title="Sửa"></a> |
+                    <a href="@Url.Action("DetailOfAppointment", new {id = item.Id})" class="fa fa-info-circle" style="font-size: 19px; color: lightblue" title="Chi tiết"></a> |
+                    <a href="@Url.Action("DeleteAppointment", new {id = item.Id})" class="fa fa-trash" style="font-size: 19px; color: red" title="Xóa"></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#table_id").dataTable();
+        });
+    </script>
+}

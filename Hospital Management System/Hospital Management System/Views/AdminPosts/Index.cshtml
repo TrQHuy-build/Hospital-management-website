@@ -1,0 +1,86 @@
+@using PagedList.Mvc
+@model PagedList.IPagedList<Hospital_Management_System.Models.Post>
+@{
+    ViewBag.Title = "Quản lý bài viết";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading d-flex justify-content-between align-items-center">
+        <h3 class="panel-title">Danh sách bài viết</h3>
+        <a href="@Url.Action("Create", "AdminPosts")" class="btn btn-primary btn-sm">
+            <i class="fa fa-plus"></i> Thêm bài viết
+        </a>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Index", "AdminPosts", FormMethod.Get, new { @class = "form-inline" }))
+        {
+            <div class="form-group">
+                <label class="sr-only" for="search">Từ khóa</label>
+                <input type="text" name="search" id="search" value="@ViewBag.Search" class="form-control" placeholder="Tìm theo tiêu đề, tác giả, slug" />
+            </div>
+            <button type="submit" class="btn btn-default">Tìm kiếm</button>
+            if (!string.IsNullOrWhiteSpace(ViewBag.Search as string))
+            {
+                @:<a href="@Url.Action("Index", "AdminPosts")" class="btn btn-link">Xóa lọc</a>
+            }
+        }
+
+        <div class="table-responsive" style="margin-top:20px;">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Tiêu đề</th>
+                        <th>Slug</th>
+                        <th>Tác giả</th>
+                        <th>Ngày đăng</th>
+                        <th>Trạng thái</th>
+                        <th style="width: 160px;">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center text-muted">Chưa có bài viết nào.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var post in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <strong>@post.Title</strong>
+                                </td>
+                                <td><code>@post.Slug</code></td>
+                                <td>@(string.IsNullOrWhiteSpace(post.Author) ? "Bệnh viện UTC2" : post.Author)</td>
+                                <td>@post.PublishedDate.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
+                                <td>
+                                    @if (post.Status)
+                                    {
+                                        <span class="label label-success">Hiển thị</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-default">Ẩn</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Details", "Articles", new { slug = post.Slug })" target="_blank" class="btn btn-link btn-xs">
+                                        <i class="fa fa-external-link"></i> Xem công khai
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-center">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = ViewBag.Search }),
+                PagedListRenderOptions.ClassicPlusFirstAndLast)
+        </div>
+    </div>
+</div>

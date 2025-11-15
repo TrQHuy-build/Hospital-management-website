@@ -1,0 +1,140 @@
+﻿@using System.Web.UI.WebControls
+@using Hospital_Management_System.Models
+@{
+    ViewBag.Title = "Trang chủ";
+    ViewBag.ActiveNav = "home";
+}
+
+<header id="Home">
+    @Html.Partial("_MainNavigation")
+    <div class="hero-text-box">
+    <h1>Bệnh viện Đa khoa<br> UTC2.</h1>
+        <br>
+    <a class="btn btn-ghost js-scroll-to-start" href="#">Xem thêm</a>
+    </div>
+</header>
+
+<section class="section-features js-section-features" id="services">
+    <div class="row">
+    <h2>Dịch vụ</h2>
+    <p class="long-copy">Xin chào, đây là Hệ thống Quản lý Bệnh viện. Chúng tôi cung cấp các dịch vụ tốt nhất cho bệnh nhân và quản lý họ một cách chuyên nghiệp.</p>
+    </div>
+    <div class="row js-wp-1">
+        <div class="col span-1-of-4 box for-icons">
+            <i class="icon ion-md-medkit"></i>
+            <h3>Cấp cứu</h3>
+            <p>Khoa Cấp cứu tại Bệnh viện và Trung tâm Y tế cung cấp chăm sóc cho bệnh nhân với các tình trạng y tế khẩn cấp từ các vấn đề phức tạp. Chăm sóc được cung cấp 24 giờ một ngày.</p>
+        </div>
+        <div class="col span-1-of-4 box for-icons">
+            <i class="icon ion-md-call"></i>
+            <h3>Trung tâm liên lạc 24/7</h3>
+            <p>Các đại lý của chúng tôi luôn có mặt 24 giờ một ngày, 7 ngày trong tuần và 365 ngày trong năm. Luôn có một đại diện lịch sự, giọng nói trực tiếp sẵn sàng hỗ trợ bệnh nhân và gia đình họ, bất kể nhu cầu của họ là gì.</p>
+        </div>
+        <div class="col span-1-of-4 box for-icons">
+            <i class="icon ion-md-car"></i>
+            <h3>Cấp cứu/Xe cứu thương</h3>
+            <p>Tiếp nhận bệnh nhân chuyển viện cần hỗ trợ thở máy và theo dõi liên tục, vận chuyển an toàn từ nhà đến bệnh viện và chiều ngược lại với đội ngũ cấp cứu chuyên nghiệp.</p>
+        </div>
+        <div class="col span-1-of-4 box for-icons">
+            <i class="icon ion-md-checkmark-circle-outline"></i>
+            <h3>Đặt lịch hẹn</h3>
+            <p>Hệ thống đặt lịch hẹn trực tuyến đã sẵn sàng, cho phép bệnh nhân chọn bác sĩ, thời gian và nhận xác nhận tức thì mà không cần chờ đợi.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section-steps" id="about">
+    <div class="row">
+        <h2>Về chúng tôi &mdash; Tầm nhìn</h2>
+    </div>
+    <div class="row">
+        <div class="col span-1-of-2 step-box">
+            <img src="~/Content/Layout/resources/img/app-iPhone.png?v=1" alt="Omnifood app on iphone" class="app-screen js-wp-2">
+        </div>
+        <div class="col span-1-of-2 step-box">
+            <div class="works-step">
+                <div>1</div>
+                <p>Hệ thống Quản lý Bệnh viện (HMS) mở cửa phục vụ mọi bệnh nhân hàng ngày, cung cấp chăm sóc y tế cơ bản và các dịch vụ chuyên sâu hiện đại.</p>
+            </div>
+            <div class="works-step">
+                <div>2</div>
+                <p>Chúng tôi sử dụng kiến thức chuyên môn để điều trị nhiều vấn đề sức khỏe khác nhau, với cách tiếp cận cá nhân và ứng dụng nghiên cứu chuyên sâu, cập nhật.</p>
+            </div>
+            <div class="works-step">
+                <div>3</div>
+                <p>
+                    Chúng tôi sẽ đổi mới và định hình tương lai chăm sóc sức khỏe cho các thế hệ,
+                    và trở thành lựa chọn hàng đầu của người bệnh.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-cities" id="cities">
+    <div class="row">
+        <h2>Hệ thống đang phục vụ tại các thành phố</h2>
+    </div>
+    <div class="row js-wp-3">
+        <div class="col span-1-of-4 box">
+            <img src="~/Content/Layout/resources/img/Lahore.jpg?v=1" alt="lisbon">
+            <h3>Lahore</h3>
+            <div class="city-feature">
+                <i class="icon ion-logo-facebook small-icons"></i>
+                <a href="#">HMS_Lahore</a>
+            </div>
+        </div>
+        <div class="col span-1-of-4 box">
+            <img src="~/Content/Layout/resources/img/Gujranwala.jpg?v=1" alt="lisbon">
+            <h3>Gujranwala</h3>
+            <div class="city-feature">
+                <i class="icon ion-logo-facebook small-icons"></i>
+                <a href="#">HMS_Gujranwala</a>
+            </div>
+        </div>
+        <div class="col span-1-of-4 box">
+            <img src="~/Content/Layout/resources/img/Faislabad.jpg?v=1" alt="lisbon">
+            <h3>Faislabad</h3>
+            <div class="city-feature">
+                <i class="icon ion-logo-facebook small-icons"></i>
+                <a href="#">HMS_Faislabad</a>
+            </div>
+        </div>
+        <div class="col span-1-of-4 box">
+            <img src="~/Content/Layout/resources/img/Multan.png?v=1" alt="lisbon">
+            <h3>Multan</h3>
+            <div class="city-feature">
+                <i class="icon ion-logo-facebook small-icons"></i>
+                <a href="#">HMS_Multan</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-testimonials" id="reviews">
+    <div class="row">
+        <h2>Bệnh nhân nói gì về chúng tôi</h2>
+    </div>
+    <div class="row">
+        <div class="col span-1-of-3">
+            <blockquote>“Đội ngũ tại HMS luôn phản hồi cực nhanh và chăm sóc tận tình. Tôi yên tâm giao sức khỏe của gia đình cho bệnh viện.”</blockquote>
+            <cite><img src="~/Content/Layout/resources/img/customer-1.jpg?v=1" alt="first-customer">Vi Duy Đoàn</cite>
+        </div>
+        <div class="col span-1-of-3">
+            <blockquote>“Gia đình tôi luôn nhận được phác đồ điều trị tốt nhất. Từ khoa Cấp cứu đến các phòng bệnh, bác sĩ và điều dưỡng đều làm việc rất chuyên nghiệp.”</blockquote>
+            <cite><img src="~/Content/Layout/resources/img/customer-2.jpg?v=1" alt="first-customer">Phạm Công Sỹ</cite>
+        </div>
+        <div class="col span-1-of-3">
+            <blockquote>“Các thủ thuật được giải thích rõ ràng, nhân viên y tế luôn thân thiện và tôn trọng người bệnh. Tôi cảm thấy rất an tâm.”</blockquote>
+            <cite><img src="~/Content/Layout/resources/img/customer-3.jpg?v=1" alt="first-customer">Nguyễn Đức Vinh</cite>
+        </div>
+    </div>
+</section>
+
+@Html.Partial("_SiteFooter")
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

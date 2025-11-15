@@ -1,0 +1,136 @@
+@using PagedList.Mvc
+@using System.Linq
+@model PagedList.IPagedList<Hospital_Management_System.Models.Post>
+@{
+    ViewBag.Title = "Bài viết";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="site-header">
+    @Html.Partial("_MainNavigation")
+</header>
+
+<section class="article-hero text-center" style="font-family: 'Times New Roman', serif;">
+    <div class="container">
+        <h1 class="display-4">Bài viết mới nhất</h1>
+        <p class="lead">Thông tin y tế, thông báo và chia sẻ kinh nghiệm từ Bệnh viện UTC2.</p>
+    </div>
+</section>
+
+<section class="article-list container" style="font-family: 'Times New Roman', serif;">
+    <div class="row">
+        @if (!Model.Any())
+        {
+            <div class="col-xs-12">
+                <div class="alert alert-info text-center">
+                    Chưa có bài viết nào được đăng.
+                </div>
+            </div>
+        }
+        else
+        {
+            foreach (var article in Model)
+            {
+                <div class="col-md-6">
+                    <div class="card article-card">
+                        @if (!string.IsNullOrWhiteSpace(article.ThumbnailUrl))
+                        {
+                            <img class="card-img-top" src="@Url.Content(article.ThumbnailUrl)" alt="@article.Title" />
+                        }
+                        <div class="card-body">
+                            <h3 class="card-title">
+                                <a href="@Url.Action("Details", "Articles", new { slug = article.Slug })">@article.Title</a>
+                            </h3>
+                            <p class="article-meta">
+                                <span><i class="glyphicon glyphicon-user"></i> @(!string.IsNullOrEmpty(article.Author) ? article.Author : "Bệnh viện UTC2")</span>
+                                <span>•</span>
+                                <span><i class="glyphicon glyphicon-time"></i> @article.PublishedDate.ToLocalTime().ToString("dd/MM/yyyy")</span>
+                            </p>
+                            <p class="card-text">
+                                @{
+                                    var preview = string.IsNullOrWhiteSpace(article.Content)
+                                        ? string.Empty
+                                        : (article.Content.Length > 200 ? article.Content.Substring(0, 200) + "..." : article.Content);
+                                }
+                                @Html.Raw(preview)
+                            </p>
+                            <a class="btn btn-primary" href="@Url.Action("Details", "Articles", new { slug = article.Slug })">Đọc tiếp</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+                PagedListRenderOptions.ClassicPlusFirstAndLast)
+        </div>
+    </div>
+</section>
+
+@Html.Partial("_SiteFooter")
+
+<style>
+    .article-hero {
+        padding: 60px 0;
+        background: linear-gradient(120deg, #0e88d3, #30b8ff);
+        color: #fff;
+        margin-bottom: 40px;
+    }
+
+    .article-card {
+        margin-bottom: 30px;
+        border: 1px solid #e5e5e5;
+        border-radius: 8px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+    }
+
+    .article-card img {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        max-height: 220px;
+        object-fit: cover;
+        width: 100%;
+    }
+
+    .article-card .card-body {
+        padding: 25px;
+    }
+
+    .article-card .card-title {
+        margin-top: 0;
+        font-size: 22px;
+        line-height: 1.4;
+    }
+
+    .article-card .card-title a {
+        color: #333;
+    }
+
+    .article-card .card-title a:hover {
+        color: #0e88d3;
+        text-decoration: none;
+    }
+
+    .article-meta {
+        font-size: 13px;
+        color: #777;
+        margin-bottom: 15px;
+    }
+
+    .article-meta span {
+        margin-right: 8px;
+    }
+
+    .article-list .btn-primary {
+        background-color: #0e88d3;
+        border-color: #0e88d3;
+    }
+
+    .article-list .btn-primary:hover {
+        background-color: #096ba5;
+        border-color: #096ba5;
+    }
+</style>

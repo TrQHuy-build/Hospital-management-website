@@ -1,0 +1,167 @@
+﻿@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quản trị viên | Bảng điều khiển</title>
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/Content/datatables/css/datatables.bootstrap.css">
+    <link rel="stylesheet" href="~/Content/Chosen/chosen.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/Layout/resources/img/logo.jpg" />
+    <link href="~/Content/css/styles.css" rel="stylesheet">
+
+    <!--Custom Font-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><span>Bảng điều khiển</span>Quản trị viên</a>
+                <ul class="nav navbar-top-links navbar-right"></ul>
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+        <div class="profile-sidebar">
+            <div class="profile-userpic">
+                <img src="~/Content/img/Administrator.png" class="img-responsive" alt="">
+            </div>
+            <div class="profile-usertitle">
+                <div class="profile-usertitle-name">@User.Identity.Name</div>
+                <div class="profile-usertitle-status"><span class="indicator label-success"></span>Quản trị viên</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="divider"></div>
+        <ul class="nav menu">
+            <li class="active"><a href="@Url.Action("Index", "Admin")"><em class="fa fa-dashboard">&nbsp;</em> Bảng điều khiển</a></li>
+
+            <li>
+                <button class="collapsible"><em class="fa fa-building-o">&nbsp; &nbsp;</em>Khoa</button>
+                <div style="width: 100% !important" class="children content">
+                    @Html.ActionLink("Thêm khoa", "AddDepartment", "Admin", null, new { @class = "list-group-item", @style = "margin: 0px -20px; font-size: 13px" })
+                    @Html.ActionLink("Danh sách khoa", "DepartmentList", "Admin", null, new { @class = "list-group-item", @style = "margin: 0px -20px; font-size: 13px" })
+                </div>
+            </li>
+            <li>
+                <button class="collapsible"><em class="fa fa-user-md">&nbsp; &nbsp;</em>Bác sĩ</button>
+                <div style="width: 100% !important" class="children content">
+                    @Html.ActionLink("Thêm bác sĩ", "AddDoctor", "Admin", null, new { @class = "list-group-item", @style = "margin: 0px -20px; font-size: 13px" })
+                    @Html.ActionLink("Danh sách bác sĩ", "ListOfDoctors", "Admin", null, new { @class = "list-group-item", @style = "margin: 0px -20px; font-size: 13px" })
+                </div>
+            </li>
+            <li>
+                <button class="collapsible"><em class="fa fa-user-o">&nbsp; &nbsp;</em>Bệnh nhân</button>
+                <div style="width: 100% !important" class="children content">
+                    @Html.ActionLink("Danh sách bệnh nhân", "ListOfPatients", "Admin", null, new { @class = "list-group-item", @style = "margin: 0px -20px; font-size: 13px" })
+                </div>
+            </li>
+            <li>
+                <button class="collapsible"><em class="fa fa-calendar-check-o">&nbsp; &nbsp;</em>Lịch trình</button>
+                <div style="width: 100% !important" class="children content">
+                    @Html.ActionLink("Thêm lịch trình", "AddSchedule", "Admin", null, new { @class = "list-group-item", @style = "margin: 0px -20px; font-size: 13px" })
+                    @Html.ActionLink("Danh sách lịch trình", "ListOfSchedules", "Admin", null, new { @class = "list-group-item", @style = "margin: 0px -20px; font-size: 13px" })
+                </div>
+            </li>
+            <li>
+                <button class="collapsible"><em class="fa fa-bullhorn">&nbsp; &nbsp;</em>Thông báo</button>
+                <div style="width: 100% !important" class="children content">
+                    @Html.ActionLink("Thêm thông báo", "AddAnnouncement", "Admin", null, new { @class = "list-group-item", @style = "margin: 0px -20px; font-size: 13px" })
+                    @Html.ActionLink("Danh sách thông báo", "ListOfAnnouncement", "Admin", null, new { @class = "list-group-item", @style = "margin: 0px -20px; font-size: 13px" })
+                </div>
+            </li>
+            <li>
+                <button class="collapsible"><em class="fa fa-pencil-square-o">&nbsp; &nbsp;</em>Cuộc hẹn</button>
+                <div style="width: 100% !important" class="children content">
+                    @Html.ActionLink("Thêm cuộc hẹn", "AddAppointment", "Admin", null, new { @class = "list-group-item", @style = "margin: 0px -20px; font-size: 13px" })
+                    @Html.ActionLink("Cuộc hẹn đang hoạt động", "ListOfAppointments", "Admin", null, new { @class = "list-group-item", @style = "margin: 0px -20px; font-size: 13px" })
+                    @Html.ActionLink("Cuộc hẹn đang chờ", "PendingAppointments", "Admin", null, new { @class = "list-group-item", @style = "margin: 0px -20px; font-size: 13px" })
+                </div>
+            </li>
+            <li>
+                <button class="collapsible"><em class="fa fa-telegram">&nbsp; &nbsp;</em>Khiếu nại</button>
+                <div style="width: 100% !important" class="children content">
+                    @Html.ActionLink("Danh sách khiếu nại", "ListOfComplains", "Admin", null, new { @class = "list-group-item", @style = "margin: 0px -20px; font-size: 13px" })
+                </div>
+            </li>
+            <li>
+                <button class="collapsible"><em class="fa fa-medkit">&nbsp; &nbsp;</em>Thuốc</button>
+                <div style="width: 100% !important" class="children content">
+                    @Html.ActionLink("Thêm thuốc", "AddMedicine", "Admin", null, new { @class = "list-group-item", @style = "margin: 0px -20px; font-size: 13px" })
+                    @Html.ActionLink("Danh sách thuốc", "ListOfMedicine", "Admin", null, new { @class = "list-group-item", @style = "margin: 0px -20px; font-size: 13px" })
+                </div>
+            </li>
+            <li>
+                <button class="collapsible"><em class="fa fa-ambulance">&nbsp; &nbsp;</em>Xe cứu thương</button>
+                <div style="width: 100% !important" class="children content">
+                    @Html.ActionLink("Thêm xe cứu thương", "AddAmbulance", "Admin", null, new { @class = "list-group-item", @style = "margin: 0px -20px; font-size: 13px" })
+                    @Html.ActionLink("Danh sách xe cứu thương", "ListOfAmbulances", "Admin", null, new { @class = "list-group-item", @style = "margin: 0px -20px; font-size: 13px" })
+                    @Html.ActionLink("Thêm tài xế", "AddAmbulanceDriver", "Admin", null, new { @class = "list-group-item", @style = "margin: 0px -20px; font-size: 13px" })
+                    @Html.ActionLink("Danh sách tài xế", "ListOfAmbulanceDrivers", "Admin", null, new { @class = "list-group-item", @style = "margin: 0px -20px; font-size: 13px" })
+                </div>
+            </li>
+            <li>
+                <button class="collapsible"><em class="fa fa-cog">&nbsp; &nbsp;</em>Quản lý</button>
+                <div style="width: 100% !important" class="children content">
+                    @Html.ActionLink("Đổi mật khẩu", "ChangePassword", "Manage", null, new { @class = "list-group-item", @style = "margin: 0px -20px; font-size: 13px" })
+                </div>
+            </li>
+            @Html.Partial("_LoginPartial")
+        </ul>
+    </div><!--/.sidebar-->
+
+    <div class="col-sm-7 col-sm-offset-3 col-lg-10 col-lg-offset-2 ">
+        @RenderBody()
+    </div>	<!--/.main-->
+
+    @Scripts.Render("~/bundles/lib")
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/custom.js"></script>
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click",
+                function () {
+                    this.classList.toggle("actives");
+                    var content = this.nextElementSibling;
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    }
+                });
+        }
+    </script>
+    <script>
+        $('.count').each(function () {
+            $(this).prop('Counter', 0).animate({
+                Counter: $(this).text()
+            }, {
+                duration: 1500,
+                easing: 'swing',
+                step: function (now) {
+                    $(this).text(Math.ceil(now));
+                }
+            });
+        });
+    </script>
+    
+    @RenderSection("scripts", required: false)
+
+</body>
+
+</html>
+

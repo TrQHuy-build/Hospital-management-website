@@ -1,0 +1,88 @@
+@model Hospital_Management_System.Models.Post
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header class="site-header">
+    @Html.Partial("_MainNavigation")
+</header>
+
+<section class="article-hero text-center" style="font-family: 'Times New Roman', serif;">
+    <div class="container">
+        <p class="back-link">
+            <a href="@Url.Action("Index", "Articles")"><i class="glyphicon glyphicon-menu-left"></i> Quay lại danh sách</a>
+        </p>
+        <h1>@Model.Title</h1>
+        <p class="article-meta">
+            <span><i class="glyphicon glyphicon-user"></i> @(!string.IsNullOrEmpty(Model.Author) ? Model.Author : "Bệnh viện UTC2")</span>
+            <span>•</span>
+            <span><i class="glyphicon glyphicon-time"></i> @Model.PublishedDate.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</span>
+        </p>
+    </div>
+</section>
+
+<section class="article-detail container" style="font-family: 'Times New Roman', serif;">
+    @if (!string.IsNullOrWhiteSpace(Model.ThumbnailUrl))
+    {
+        <div class="text-center">
+            <img src="@Url.Content(Model.ThumbnailUrl)" alt="@Model.Title" class="article-thumbnail img-responsive" />
+        </div>
+    }
+
+    <article class="article-content">
+        @Html.Raw(Model.Content)
+    </article>
+</section>
+
+@Html.Partial("_SiteFooter")
+
+<style>
+    .article-hero {
+        padding: 40px 0;
+        background: #f8fbff;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .article-hero h1 {
+        margin-top: 10px;
+        font-size: 36px;
+        line-height: 1.4;
+    }
+
+    .article-meta {
+        font-size: 14px;
+        color: #666;
+    }
+
+    .article-meta span {
+        margin: 0 5px;
+    }
+
+    .back-link a {
+        color: #0e88d3;
+        font-weight: 600;
+    }
+
+    .article-detail {
+        padding: 40px 0 60px;
+        max-width: 900px;
+    }
+
+    .article-thumbnail {
+        max-height: 360px;
+        margin-bottom: 25px;
+        border-radius: 10px;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .article-content {
+        font-size: 17px;
+        line-height: 1.8;
+        color: #333;
+    }
+
+    .article-content p + p {
+        margin-top: 18px;
+    }
+</style>

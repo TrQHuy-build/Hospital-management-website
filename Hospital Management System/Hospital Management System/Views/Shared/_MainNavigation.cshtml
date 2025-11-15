@@ -1,0 +1,25 @@
+@{
+    Func<string, string> HomeLink = section =>
+        (ViewBag.ActiveNav as string) == "home"
+            ? $"#{section}"
+            : $"{Url.Action("Index", "Home")}#{section}";
+}
+
+<meta charset="utf-8" />
+
+<nav>
+    <div class="row">
+        <img src="~/Content/Layout/resources/img/logo-white.jpg?v=1" alt="HMS logo" class="logo">
+        <img src="~/Content/Layout/resources/img/logo.jpg?v=1" alt="HMS logo" class="logo-black">
+        <ul class="main-nav js-main-nav">
+            <li class="@(ViewBag.ActiveNav == "home" ? "active" : string.Empty)"><a href="@HomeLink("Home")">Trang chủ</a></li>
+            <li><a href="@HomeLink("services")">Dịch vụ</a></li>
+            <li><a href="@HomeLink("about")">Giới thiệu</a></li>
+            <li><a href="@HomeLink("contact")">Liên hệ</a></li>
+            <li class="@(ViewBag.ActiveNav == "articles" ? "active" : string.Empty)"><a href="@Url.Action("Index", "Articles")">Bài viết</a></li>
+            <li><a href="@Url.Action("Register", "Account")">Đăng ký</a></li>
+            <li><a href="@Url.Action("Login", "Account")">Đăng nhập</a></li>
+        </ul>
+        <a class="mobile-nav-icon js-mobile-nav-icon"><i class="ion-ios-menu"></i></a>
+    </div>
+</nav>
